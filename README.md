@@ -1,11 +1,8 @@
 dev-shell-scripts
 =================
 
-A collection of developer shells scripts I put together for doing routine
-stuff on the command line.
-
-It's in a public repository both so I can grab it from anywhere and so others
-can take it if they find it useful.
+A collection of shells scripts for doing routine stuff on the command line.
 
 
-dropalltables: drop all tables in a database
+| dropalltables | Drop all tables in a database |
+| restore-db.sh | Restore a sql dump file, compresses or uncompressed, to a database | 
