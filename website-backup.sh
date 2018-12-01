@@ -2,7 +2,7 @@
 #
 # Backup up a website database and files.
 #
-VERSION=0.1
+VERSION=1.0
 
 if [ "$1" = "" ] ; then
   echo ""
@@ -84,6 +84,13 @@ if [ -f $websiteDirectory/wp-config.php ]; then
   PASSWORD=`grep 'DB_PASSWORD' $websiteDirectory/wp-config.php | awk -F "'" '{ print $4 }'`
   DATABASE=`grep 'DB_NAME' $websiteDirectory/wp-config.php | awk -F "'" '{ print $4 }'`
   HOST=`grep 'DB_HOST' $websiteDirectory/wp-config.php | awk -F "'" '{ print $4 }'`
+elif [ -f $websiteDirectory/sites/default/settings.php ]; then
+  # Drupal site
+  # This detection method can break in any number of ways. It will need to be bolstered.
+  USERNAME=`grep "^[[:space:]]*'username'" $websiteDirectory/sites/default/settings.php | awk -F "'" '{ print $4 }'`
+  PASSWORD=`grep "^[[:space:]]*'password'" $websiteDirectory/sites/default/settings.php | awk -F "'" '{ print $4 }'`
+  DATABASE=`grep "^[[:space:]]*'database'" $websiteDirectory/sites/default/settings.php | awk -F "'" '{ print $4 }'`
+  HOST=`grep "^[[:space:]]*'host'" $websiteDirectory/sites/default/settings.php | awk -F "'" '{ print $4 }'`
 else
   echo " WARNING: Can not determine the CMS"
   exit 1
@@ -96,13 +103,13 @@ echo ""
 echo "Performing $backupType backup of $websiteDirectory to $outputDir"
 echo ""
 if [ "$backupType" == "db" ]; then
-  mysqldump -u$USERNAME -p$PASSWORD $DATABASE | gzip > $outputDir/$outputFilenameSql
+  mysqldump -u$USERNAME -p$PASSWORD -h$HOST $DATABASE | gzip > $outputDir/$outputFilenameSql
 elif [ "$backupType" == "file" ]; then
   cd $parentDirectory
   tar -czf $outputDir/$outputFilenameTar $rootDirectory
 elif [ "$backupType" == "full" ]; then
   cd $parentDirectory
-  mysqldump -u$USERNAME -p$PASSWORD $DATABASE | gzip > $outputFilenameSql
+  mysqldump -u$USERNAME -p$PASSWORD -h$HOST $DATABASE | gzip > $outputFilenameSql
   tar -czf $outputDir/$outputFilenameTar $rootDirectory $outputFilenameSql
   rm $outputFilenameSql
 fi
