@@ -7,8 +7,23 @@ A collection of shells scripts for doing routine stuff on the command line.
 | Script | Description |
 | --- | --- |
 | dropalltables | Drop all tables in a database |
+| make-wp-site.sh | Make a fully configured WordPress site |
 | restore-db.sh | Restore a sql dump file, compresses or uncompressed, to a database | 
 | website-backup.sh | Database and file backup of a Drupal or WordPress website |
+
+## make-wp-site.sh
+
+Make a fully set-up WordPress in a LAMP environment.
+
+**Usage:**
+
+`wp-site-create`
+
+Prompts for required parameters.
+
+**Notes:**
+
+- Requires wp-cli (wp) and mysql command line utilities
 
 ## dropalltables
 
@@ -24,7 +39,7 @@ Drop all the tables in the specified database.
 - This will leave the database password on the command line history. If this is a concern, use the  `history -c` command to clear thie history, or use the technique described in this stackoverflow article: [Execute command without keeping it in history](https://stackoverflow.com/questions/8473121/execute-command-without-keeping-it-in-history)
 
 
-#restore-db.sh
+## restore-db.sh
 
 Restores a sqldump or gzipped sqldump file to the specified database.
 
