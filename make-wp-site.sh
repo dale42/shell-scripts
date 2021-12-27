@@ -2,7 +2,7 @@
 #
 # Backup up a website database and files.
 #
-Version=1.0
+Version=1.0.1
 
 #
 # Banner
@@ -174,7 +174,7 @@ mysql -u$MySql_Account -p$MySql_Password -e "$SQL_Commands"
 #
 # Install WordPress
 #
-mkdir $Site_Directory
+mkdir -p $Site_Directory
 cd $Site_Directory
 wp core download
 wp core config \
