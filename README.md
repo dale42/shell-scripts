@@ -6,9 +6,26 @@ A collection of shells scripts for doing routine stuff on the command line.
 
 | Script | Description |
 | --- | --- |
+| ddev-drupalcreate.sh | Creates a Drupal 9 site in DDEV |
 | dropalltables | Drop all tables in a database |
 | restore-db.sh | Restore a sql dump file, compresses or uncompressed, to a database | 
 | website-backup.sh | Database and file backup of a Drupal or WordPress website |
+
+## ddev-drupalcreate.sh
+
+Creates a Drupal 9 site in DDEV.
+
+**Usage:**
+
+`ddev-drupalcreate [directory]`
+
+**Notes:**
+
+- `directory` is created in the current working directory
+- Only tested on a Mac
+- The DDEV http/https ports are changed to 8080 and 8043 to avoid conflicts with other http daemons
+- DDEV Mutagen is enabled (because Mac)
+- A number of common Drupal modules are added (e.g.: devel, admin_toobar)
 
 ## dropalltables
 
